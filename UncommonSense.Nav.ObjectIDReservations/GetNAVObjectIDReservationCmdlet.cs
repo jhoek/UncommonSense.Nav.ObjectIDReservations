@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Management.Automation;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace UncommonSense.Nav.ObjectIDReservations
+{
+    [Cmdlet(VerbsCommon.Get, "NAVObjectIDReservation")]
+    [OutputType(typeof(Reservation))]
+    public class GetNAVObjectIDReservationCmdlet : NAVObjectIDReservationCmdlet
+    {
+        protected override void EndProcessing()
+        {
+            WriteObject(LoadReservations());                        
+        }
+    }
+}

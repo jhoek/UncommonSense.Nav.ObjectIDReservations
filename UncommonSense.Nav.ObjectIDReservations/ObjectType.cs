@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace UncommonSense.Nav.ObjectIDReservations
 {
-    public class Class1
+    public enum ObjectType
     {
+        Table,
+        Page,
+        Report,
+        Codeunit,
+        XmlPort,
+        Query,
+        MenuSuite
     }
 }
