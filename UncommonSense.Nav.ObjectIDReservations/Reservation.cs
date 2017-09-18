@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace UncommonSense.Nav.ObjectIDReservations
 {
-    // FIXME: Standardize date format
     // FIXME: Voeg scriptblock en status "Reserved" toe aan bestaande cmdlet(s)
     // FIXME: Cmdlet voor omzetten naar HTML weg; formatting file maken
-    // FIXME: RSS feed voor toevoegingen en verwijderingen
     // FIXME: Datafile in TFS; get en checkin waar nodig
 
     public class Reservation
