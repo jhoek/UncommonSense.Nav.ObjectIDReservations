@@ -20,6 +20,9 @@ namespace UncommonSense.Nav.ObjectIDReservations
         [Parameter()]
         public string Comment { get; set; }
 
+        [Parameter()]
+        public SwitchParameter Force { get; set; }
+
         protected List<Reservation> reservations = new List<Reservation>();
 
         protected override void BeginProcessing()
@@ -31,14 +34,27 @@ namespace UncommonSense.Nav.ObjectIDReservations
         {
             foreach (var objectID in ObjectID)
             {
-                // bestaat al? 
-                // van jou?
-
+                switch (GetSituation(reservations, ObjectType, objectID, out Reservation reservation))
+                {
+                    case Situation.ReservationDoesNotExist:
+                        break;
+                    case Situation.ReservationExistsAndIsYours:
+                        WriteWarning("FIXME");
+                        continue;
+                    case Situation.ReservationExistsAndIsNotYours when Force:
+                        reservations.Remove(reservation);
+                        break;
+                    case Situation.ReservationExistsAndIsNotYours:
+                        // FIXME: WriteError("");
+                        continue;
+                    default:
+                        throw new ArgumentOutOfRangeException("Unanticipated situation.");
+                }
 
                 reservations.Add(
                     new Reservation(
                         ObjectType,
-                        objectID, 
+                        objectID,
                         DateTime.Now,
                         Environment.UserName,
                         Comment

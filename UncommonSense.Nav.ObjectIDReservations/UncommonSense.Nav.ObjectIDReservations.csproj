@@ -52,6 +52,7 @@
     <Compile Include="NewNAVObjectIDReservationCmdlet.cs" />
     <Compile Include="ObjectType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Situation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

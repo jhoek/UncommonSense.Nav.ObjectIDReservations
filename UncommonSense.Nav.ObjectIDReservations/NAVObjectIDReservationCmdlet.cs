@@ -41,45 +41,23 @@ namespace UncommonSense.Nav.ObjectIDReservations
                     Encoding.UTF8);
         }
 
-        public bool ReservationExists(Reservation reservation)
+        public Situation GetSituation(IEnumerable<Reservation> reservations, ObjectType objectType, int objectID, out Reservation reservation)
         {
-            if (reservation == null)
-            {
-                WriteError(
-                    new ErrorRecord(
-                        new ItemNotFoundException("FIXME"),
-                        "FIXME:ErrorID",
-                        ErrorCategory.InvalidOperation, 
-                        null
-                    )
-                );
-                return false;
-            }
-            else
-            {
-                return true;
-            }            
-        }
+            reservation = reservations
+                .Where(r => r.ObjectType == objectType)
+                .Where(r => r.ObjectID == objectID)
+                .SingleOrDefault();
 
-        public bool ReservationIsYours(Reservation reservation)
-        {
-            if (reservation.UserName.Equals(Environment.UserName, StringComparison.InvariantCultureIgnoreCase))
+            switch (reservation)
             {
-                return true;
+                case null:
+                    return Situation.ReservationDoesNotExist;
+                case Reservation r when r.IsYours():
+                    return Situation.ReservationExistsAndIsYours;
+                default:
+                    return Situation.ReservationExistsAndIsNotYours;
             }
-            else
-            {
-                WriteError(
-                    new ErrorRecord(
-                        new ItemNotFoundException("FIXME"),
-                        "FIXME:ErrorID",
-                        ErrorCategory.InvalidOperation,
-                        null
-                    )
-                );
 
-                return false;
-            }
         }
     }
-}
+}    

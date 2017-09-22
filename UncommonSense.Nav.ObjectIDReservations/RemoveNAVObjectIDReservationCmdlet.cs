@@ -13,8 +13,11 @@ namespace UncommonSense.Nav.ObjectIDReservations
         [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, Position = 1)]
         public ObjectType ObjectType { get; set; }
 
-        [Parameter(Mandatory =true, ValueFromPipeline =true, ValueFromPipelineByPropertyName =true, Position = 2)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, Position = 2)]
         public int[] ObjectID { get; set; }
+
+        [Parameter()]
+        public SwitchParameter Force { get; set; }
 
         protected List<Reservation> reservations = new List<Reservation>();
 
@@ -27,14 +30,22 @@ namespace UncommonSense.Nav.ObjectIDReservations
         {
             foreach (var objectID in ObjectID)
             {
-                var reservation = reservations
-                    .Where(r => r.ObjectType == ObjectType)
-                    .Where(r => r.ObjectID == objectID)
-                    .SingleOrDefault();
+                switch (GetSituation(reservations, ObjectType, objectID, out Reservation reservation))
+                {
+                    case Situation.ReservationDoesNotExist:
+                        WriteError(new ErrorRecord());
+                        continue;
+                    case Situation.ReservationExistsAndIsYours:
+                        break;
+                    case Situation.ReservationExistsAndIsNotYours when Force:
+                        break;
+                    case Situation.ReservationExistsAndIsNotYours:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException("Unanticipated situation.");
+                }
 
-                if (ReservationExists(reservation))
-                    if (ReservationIsYours(reservation))
-                        reservations.Remove(reservation);
+                reservations.Remove(reservation);
             }
         }
 
