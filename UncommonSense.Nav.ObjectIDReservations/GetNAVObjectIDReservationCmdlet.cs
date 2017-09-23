@@ -9,6 +9,7 @@ namespace UncommonSense.Nav.ObjectIDReservations
 {
     [Cmdlet(VerbsCommon.Get, "NAVObjectIDReservation")]
     [OutputType(typeof(Reservation))]
+    [Alias("reservations")]
     public class GetNAVObjectIDReservationCmdlet : NAVObjectIDReservationCmdlet
     {
         protected override void EndProcessing()

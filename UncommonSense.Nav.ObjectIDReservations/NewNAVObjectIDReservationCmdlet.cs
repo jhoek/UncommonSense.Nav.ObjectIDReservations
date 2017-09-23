@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 namespace UncommonSense.Nav.ObjectIDReservations
 {
     [Cmdlet(VerbsCommon.New, "NavObjectIDReservation")]
+    [OutputType(typeof(Reservation))]
+    [Alias("reserve")]
     public class NewNAVObjectIDReservationCmdlet : NAVObjectIDReservationCmdlet
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, Position = 1)]
@@ -39,27 +41,28 @@ namespace UncommonSense.Nav.ObjectIDReservations
                     case Situation.ReservationDoesNotExist:
                         break;
                     case Situation.ReservationExistsAndIsYours:
-                        WriteWarning("FIXME");
+                        WriteWarning($"{ObjectType} {objectID} is already reserved for you.");
                         continue;
                     case Situation.ReservationExistsAndIsNotYours when Force:
                         reservations.Remove(reservation);
                         break;
                     case Situation.ReservationExistsAndIsNotYours:
-                        // FIXME: WriteError("");
+                        WriteError($"{ObjectType} {objectID} is already reserved by {reservation.UserName}.", "AlreadyReserved", ErrorCategory.ResourceUnavailable);
                         continue;
                     default:
                         throw new ArgumentOutOfRangeException("Unanticipated situation.");
                 }
 
-                reservations.Add(
-                    new Reservation(
-                        ObjectType,
-                        objectID,
-                        DateTime.Now,
-                        Environment.UserName,
-                        Comment
-                    )
+                var newReservation = new Reservation(
+                    ObjectType,
+                    objectID,
+                    DateTime.Now,
+                    Environment.UserName,
+                    Comment
                 );
+
+                WriteObject(newReservation);
+                reservations.Add(newReservation);
             }
         }
 
