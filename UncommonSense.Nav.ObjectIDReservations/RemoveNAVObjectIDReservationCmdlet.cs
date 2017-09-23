@@ -33,14 +33,15 @@ namespace UncommonSense.Nav.ObjectIDReservations
                 switch (GetSituation(reservations, ObjectType, objectID, out Reservation reservation))
                 {
                     case Situation.ReservationDoesNotExist:
-                        WriteError(new ErrorRecord());
+                        WriteError($"Reservation for {ObjectType} {objectID} does not exist.", "ReservationDoesNotExist", ErrorCategory.ResourceUnavailable);
                         continue;
                     case Situation.ReservationExistsAndIsYours:
                         break;
                     case Situation.ReservationExistsAndIsNotYours when Force:
                         break;
                     case Situation.ReservationExistsAndIsNotYours:
-                        break;
+                        WriteError($"Reservation for {ObjectType} {objectID} exists but is not yours.", "ReservationNotYours", ErrorCategory.InvalidOperation);
+                        continue;
                     default:
                         throw new ArgumentOutOfRangeException("Unanticipated situation.");
                 }

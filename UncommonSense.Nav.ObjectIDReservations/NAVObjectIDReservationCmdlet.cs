@@ -57,7 +57,18 @@ namespace UncommonSense.Nav.ObjectIDReservations
                 default:
                     return Situation.ReservationExistsAndIsNotYours;
             }
+        }
 
+        protected void WriteError(string message, string errorId, ErrorCategory errorCategory)
+        {
+            WriteError(
+                new ErrorRecord(
+                    new ArgumentException(message),
+                    errorId,
+                    errorCategory,
+                    null
+                )
+            );
         }
     }
 }    
