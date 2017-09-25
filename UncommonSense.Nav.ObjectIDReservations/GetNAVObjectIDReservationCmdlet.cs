@@ -14,7 +14,7 @@ namespace UncommonSense.Nav.ObjectIDReservations
     {
         protected override void EndProcessing()
         {
-            WriteObject(LoadReservations());                        
+            WriteObject(LoadReservations(), true);                        
         }
     }
 }
