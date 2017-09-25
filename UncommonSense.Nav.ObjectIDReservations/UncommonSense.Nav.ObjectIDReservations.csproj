@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\Debug\UncommonSense.Nav.ObjectIDReservations\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -56,9 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="UncommonSense.Nav.ObjectIDReservations.Format.ps1xml" />
-    <None Include="UncommonSense.Nav.ObjectIDReservations.psd1" />
-    <None Include="UncommonSense.Nav.ObjectIDReservations.Types.ps1xml" />
+    <None Include="ObjectIDReservations.Format.ps1xml" />
+    <None Include="ObjectIDReservations.psd1" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(ProjectDir)ObjectIDReservations.psd1 $(TargetDir)UncommonSense.Nav.ObjectIDReservations.psd1
+copy $(ProjectDir)ObjectIDReservations.Format.ps1xml $(TargetDir)UncommonSense.Nav.ObjectIDReservations.Format.ps1xml</PostBuildEvent>
+  </PropertyGroup>
 </Project>
