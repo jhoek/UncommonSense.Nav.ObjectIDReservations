@@ -2,7 +2,7 @@
 <Configuration>
   <ViewDefinitions>
     <View>
-      <Name>Default</Name>
+      <Name>UncommonSense.Nav.ObjectIDReservation.Reservation</Name>
       <ViewSelectedBy>
         <TypeName>UncommonSense.Nav.ObjectIDReservation.Reservation</TypeName>
       </ViewSelectedBy>
