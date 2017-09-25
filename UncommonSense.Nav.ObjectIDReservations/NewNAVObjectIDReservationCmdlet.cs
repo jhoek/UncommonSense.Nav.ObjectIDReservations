@@ -19,7 +19,7 @@ namespace UncommonSense.Nav.ObjectIDReservations
         [ValidateRange(1, int.MaxValue)]
         public int[] ObjectID { get; set; }
 
-        [Parameter()]
+        [Parameter(Position = 3)]
         public string Comment { get; set; }
 
         [Parameter()]
