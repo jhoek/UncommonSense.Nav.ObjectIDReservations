@@ -21,6 +21,8 @@ namespace UncommonSense.Nav.ObjectIDReservations
         {
             if (File.Exists(DataFilePath))
             {
+                WriteVerbose($"Using data file '{DataFilePath}'.");
+
                 return File
                     .ReadAllLines(DataFilePath, Encoding.UTF8)
                     .Where(l => !l.StartsWith("//"))
@@ -28,6 +30,8 @@ namespace UncommonSense.Nav.ObjectIDReservations
             }
             else
             {
+                WriteWarning($"Specified data file '{DataFilePath}' does not exist.");
+
                 return Enumerable.Empty<Reservation>();
             }
         }

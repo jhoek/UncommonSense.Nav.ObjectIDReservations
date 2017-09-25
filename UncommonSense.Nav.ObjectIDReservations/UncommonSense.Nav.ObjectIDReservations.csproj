@@ -58,6 +58,7 @@
     <None Include="packages.config" />
     <None Include="UncommonSense.Nav.ObjectIDReservations.Format.ps1xml" />
     <None Include="UncommonSense.Nav.ObjectIDReservations.psd1" />
+    <None Include="UncommonSense.Nav.ObjectIDReservations.Types.ps1xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
