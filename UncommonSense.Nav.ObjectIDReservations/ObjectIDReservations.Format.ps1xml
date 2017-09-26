@@ -2,14 +2,14 @@
 <Configuration>
   <ViewDefinitions>
     <View>
-      <Name>UncommonSense.Nav.ObjectIDReservation.Reservation</Name>
+      <Name>Default</Name>
       <ViewSelectedBy>
-        <TypeName>UncommonSense.Nav.ObjectIDReservation.Reservation</TypeName>
+        <TypeName>UncommonSense.Nav.ObjectIDReservations.Reservation</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
-            <Width>15</Width>
+            <Width>10</Width>
           </TableColumnHeader>
           <TableColumnHeader>
             <Width>10</Width>
@@ -18,6 +18,12 @@
           <TableColumnHeader>
             <Width>20</Width>
             <Alignment>Right</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>15</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>20</Width>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
@@ -31,6 +37,12 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>DateTime</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UserName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Comment</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
