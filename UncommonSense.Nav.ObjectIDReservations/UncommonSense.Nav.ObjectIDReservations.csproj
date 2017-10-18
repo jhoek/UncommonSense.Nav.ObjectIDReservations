@@ -11,6 +11,8 @@
     <AssemblyName>UncommonSense.Nav.ObjectIDReservations</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\UncommonSense.Nav.ObjectIDReservations\UncommonSense.Nav.ObjectIDReservations.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,23 +48,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="GetNAVObjectIDReservationCmdlet.cs" />
-    <Compile Include="RemoveNAVObjectIDReservationCmdlet.cs" />
+    <Compile Include="Cmdlets\GetNAVObjectIDReservationCmdlet.cs" />
+    <Compile Include="Cmdlets\RemoveNAVObjectIDReservationCmdlet.cs" />
     <Compile Include="Reservation.cs" />
-    <Compile Include="NAVObjectIDReservationCmdlet.cs" />
-    <Compile Include="NewNAVObjectIDReservationCmdlet.cs" />
+    <Compile Include="Cmdlets\NAVObjectIDReservationCmdlet.cs" />
+    <Compile Include="Cmdlets\NewNAVObjectIDReservationCmdlet.cs" />
     <Compile Include="ObjectType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Situation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="ObjectIDReservations.Format.ps1xml" />
-    <None Include="ObjectIDReservations.psd1" />
+    <None Include="Formatting.ps1xml" />
+    <None Include="Manifest.psd1" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(ProjectDir)ObjectIDReservations.psd1 $(TargetDir)UncommonSense.Nav.ObjectIDReservations.psd1
-copy $(ProjectDir)ObjectIDReservations.Format.ps1xml $(TargetDir)UncommonSense.Nav.ObjectIDReservations.Format.ps1xml</PostBuildEvent>
+    <PostBuildEvent>copy $(ProjectDir)Manifest.psd1 $(TargetDir)UncommonSense.Nav.ObjectIDReservations.psd1
+copy $(ProjectDir)Formatting.ps1xml $(TargetDir)UncommonSense.Nav.ObjectIDReservations.Format.ps1xml</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\XmlDoc2CmdletDoc.0.2.9\build\XmlDoc2CmdletDoc.targets" Condition="Exists('..\packages\XmlDoc2CmdletDoc.0.2.9\build\XmlDoc2CmdletDoc.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\XmlDoc2CmdletDoc.0.2.9\build\XmlDoc2CmdletDoc.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\XmlDoc2CmdletDoc.0.2.9\build\XmlDoc2CmdletDoc.targets'))" />
+  </Target>
 </Project>
