@@ -5,22 +5,16 @@ using System.Management.Automation;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UncommonSense.Nav.ObjectIDReservations
+namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
 {
-    [Cmdlet(VerbsCommon.New, "NavObjectIDReservation")]
-    [OutputType(typeof(Reservation))]
-    [Alias("reserve")]
-    public class NewNAVObjectIDReservationCmdlet : NAVObjectIDReservationCmdlet
+    [Cmdlet(VerbsCommon.Remove, "NavObjectIDReservation")]
+    public class RemoveNAVObjectIDReservationCmdlet : NAVObjectIDReservationCmdlet
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, Position = 1)]
         public ObjectType ObjectType { get; set; }
 
         [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, Position = 2)]
-        [ValidateRange(1, int.MaxValue)]
         public int[] ObjectID { get; set; }
-
-        [Parameter(Position = 3)]
-        public string Comment { get; set; }
 
         [Parameter()]
         public SwitchParameter Force { get; set; }
@@ -39,30 +33,20 @@ namespace UncommonSense.Nav.ObjectIDReservations
                 switch (GetSituation(reservations, ObjectType, objectID, out Reservation reservation))
                 {
                     case Situation.ReservationDoesNotExist:
-                        break;
-                    case Situation.ReservationExistsAndIsYours:
-                        WriteWarning($"{ObjectType} {objectID} is already reserved for you.");
+                        WriteError($"Reservation for {ObjectType} {objectID} does not exist.", "ReservationDoesNotExist", ErrorCategory.ResourceUnavailable);
                         continue;
+                    case Situation.ReservationExistsAndIsYours:
+                        break;
                     case Situation.ReservationExistsAndIsNotYours when Force:
-                        reservations.Remove(reservation);
                         break;
                     case Situation.ReservationExistsAndIsNotYours:
-                        WriteError($"{ObjectType} {objectID} is already reserved by {reservation.UserName}.", "AlreadyReserved", ErrorCategory.ResourceUnavailable);
+                        WriteError($"Reservation for {ObjectType} {objectID} exists but is not yours.", "ReservationNotYours", ErrorCategory.InvalidOperation);
                         continue;
                     default:
                         throw new ArgumentOutOfRangeException("Unanticipated situation.");
                 }
 
-                var newReservation = new Reservation(
-                    ObjectType,
-                    objectID,
-                    DateTime.Now,
-                    Environment.UserName,
-                    Comment
-                );
-
-                WriteObject(newReservation);
-                reservations.Add(newReservation);
+                reservations.Remove(reservation);
             }
         }
 

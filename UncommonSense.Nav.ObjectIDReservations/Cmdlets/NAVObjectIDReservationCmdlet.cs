@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace UncommonSense.Nav.ObjectIDReservations
+namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
 {
     // FIXME: Functions in profile die eerste tf get doen (niet eens default params nodig, dus)
 

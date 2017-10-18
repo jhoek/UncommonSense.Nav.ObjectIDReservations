@@ -5,7 +5,7 @@ using System.Management.Automation;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UncommonSense.Nav.ObjectIDReservations
+namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
 {
     [Cmdlet(VerbsCommon.Get, "NAVObjectIDReservation")]
     [OutputType(typeof(Reservation))]
