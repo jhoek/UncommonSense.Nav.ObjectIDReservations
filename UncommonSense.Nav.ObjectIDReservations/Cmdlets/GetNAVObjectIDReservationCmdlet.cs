@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 
 namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
 {
+    /// <summary>
+    /// <para type="description">Retrieves all NAV object ID reservations</para>
+    /// </summary>
     [Cmdlet(VerbsCommon.Get, "NAVObjectIDReservation")]
     [OutputType(typeof(Reservation))]
     [Alias("reservations")]
     public class GetNAVObjectIDReservationCmdlet : NAVObjectIDReservationCmdlet
     {
+        /// <Exclude/>
         protected override void EndProcessing()
         {
             WriteObject(LoadReservations(), true);                        

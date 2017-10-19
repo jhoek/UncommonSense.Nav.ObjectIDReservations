@@ -7,31 +7,49 @@ using System.Threading.Tasks;
 
 namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
 {
+    /// <summary>
+    /// <para type="description">Creates a new NAV object ID reservation</para>
+    /// </summary>
     [Cmdlet(VerbsCommon.New, "NavObjectIDReservation")]
     [OutputType(typeof(Reservation))]
     [Alias("reserve")]
     public class NewNAVObjectIDReservationCmdlet : NAVObjectIDReservationCmdlet
     {
+        /// <summary>
+        /// <para type="description">The type of object to reserve</para>
+        /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, Position = 1)]
         public ObjectType ObjectType { get; set; }
 
+        /// <summary>
+        /// <para type="description">One or more object IDs to reserve</para>
+        /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, Position = 2)]
         [ValidateRange(1, int.MaxValue)]
         public int[] ObjectID { get; set; }
 
+        /// <summary>
+        /// <para type="description">Optional comment for the reservation</para>
+        /// </summary>
         [Parameter(Position = 3)]
         public string Comment { get; set; }
 
+        /// <summary>
+        /// <para type="desc">If present, allows overwriting of other users' reservations</para>
+        /// </summary>
         [Parameter()]
         public SwitchParameter Force { get; set; }
 
+        /// <Exclude/>
         protected List<Reservation> reservations = new List<Reservation>();
 
+        /// <Exclude/>
         protected override void BeginProcessing()
         {
             reservations = LoadReservations().ToList();
         }
 
+        /// <Exclude/>
         protected override void ProcessRecord()
         {
             foreach (var objectID in ObjectID)
@@ -66,6 +84,7 @@ namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
             }
         }
 
+        /// <Exclude/>
         protected override void EndProcessing()
         {
             SaveReservations(reservations);

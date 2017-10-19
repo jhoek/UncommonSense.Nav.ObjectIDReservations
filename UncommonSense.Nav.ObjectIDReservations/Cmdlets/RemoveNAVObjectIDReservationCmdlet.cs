@@ -7,25 +7,40 @@ using System.Threading.Tasks;
 
 namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
 {
+    /// <summary>
+    /// <para type="description">Removes an existing NAV object ID reservation</para>
+    /// </summary>
     [Cmdlet(VerbsCommon.Remove, "NavObjectIDReservation")]
     public class RemoveNAVObjectIDReservationCmdlet : NAVObjectIDReservationCmdlet
     {
+        /// <summary>
+        /// <para type="description">The type of the reserved object</para>
+        /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, Position = 1)]
         public ObjectType ObjectType { get; set; }
 
+        /// <summary>
+        /// <para type="description">The ID of the reserved object</para>
+        /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, Position = 2)]
         public int[] ObjectID { get; set; }
 
+        /// <summary>
+        /// <para type="description">If present, allows removal of other users' reservations</para>
+        /// </summary>
         [Parameter()]
         public SwitchParameter Force { get; set; }
 
+        /// <Exclude/>
         protected List<Reservation> reservations = new List<Reservation>();
 
+        /// <Exclude/>
         protected override void BeginProcessing()
         {
             reservations = LoadReservations().ToList();
         }
 
+        /// <Exclude/>
         protected override void ProcessRecord()
         {
             foreach (var objectID in ObjectID)
@@ -50,6 +65,7 @@ namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
             }
         }
 
+        /// <Exclude/>
         protected override void EndProcessing()
         {
             SaveReservations(reservations);

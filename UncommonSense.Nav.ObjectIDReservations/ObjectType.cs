@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#pragma warning disable 1591
+
 namespace UncommonSense.Nav.ObjectIDReservations
 {
     public enum ObjectType
@@ -17,3 +19,5 @@ namespace UncommonSense.Nav.ObjectIDReservations
         MenuSuite
     }
 }
+
+#pragma warning restore 1591

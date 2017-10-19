@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#pragma warning disable 1591
+
 namespace UncommonSense.Nav.ObjectIDReservations
 {
     public static class ExtensionMethods
@@ -15,3 +17,5 @@ namespace UncommonSense.Nav.ObjectIDReservations
         public static bool IsYours(this Reservation reservation) => reservation?.UserName.Equals(Environment.UserName, StringComparison.InvariantCultureIgnoreCase) ?? false;
     }
 }
+
+#pragma warning restore 1591

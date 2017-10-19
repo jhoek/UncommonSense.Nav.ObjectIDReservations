@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
+#pragma warning disable 1591
+
 namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
 {
-    // FIXME: Functions in profile die eerste tf get doen (niet eens default params nodig, dus)
-
     public abstract class NAVObjectIDReservationCmdlet : Cmdlet
     {
         [Parameter(Mandatory = true)]
@@ -75,4 +75,6 @@ namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
             );
         }
     }
-}    
+}
+
+#pragma warning restore 1591
