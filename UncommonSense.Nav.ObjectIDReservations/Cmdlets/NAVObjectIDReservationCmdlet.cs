@@ -17,8 +17,18 @@ namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
         [Parameter(Mandatory = true)]
         public string DataFilePath { get; set; }
 
+        [Parameter()]
+        [ValidateNotNull()]
+        public ScriptBlock BeforeLoad { get; set; } = ScriptBlock.Create("{}");
+
+        [Parameter()]
+        [ValidateNotNull()]
+        public ScriptBlock AfterSave { get; set; } = ScriptBlock.Create("{}");
+
         public IEnumerable<Reservation> LoadReservations()
         {
+            BeforeLoad.Invoke();
+
             if (File.Exists(DataFilePath))
             {
                 WriteVerbose($"Using data file '{DataFilePath}'.");
@@ -43,6 +53,8 @@ namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
                     DataFilePath,
                     reservations.Select(r => r.ToString()),
                     Encoding.UTF8);
+
+            AfterSave.Invoke();
         }
 
         public Situation GetSituation(IEnumerable<Reservation> reservations, ObjectType objectType, int objectID, out Reservation reservation)
