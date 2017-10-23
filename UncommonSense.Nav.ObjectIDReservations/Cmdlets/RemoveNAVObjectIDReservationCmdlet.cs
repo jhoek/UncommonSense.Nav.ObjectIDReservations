@@ -61,6 +61,7 @@ namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
                         throw new ArgumentOutOfRangeException("Unanticipated situation.");
                 }
 
+                WriteVerbose($"Removing reservation for {ObjectType} {objectID}");
                 reservations.Remove(reservation);
             }
         }
