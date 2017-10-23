@@ -55,7 +55,7 @@ namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
                     case Situation.ReservationExistsAndIsNotYours when Force:
                         break;
                     case Situation.ReservationExistsAndIsNotYours:
-                        WriteError($"Reservation for {ObjectType} {objectID} exists but is not yours.", "ReservationNotYours", ErrorCategory.InvalidOperation);
+                        WriteError($"Reservation for {ObjectType} {objectID} exists but is not yours. Use -Force to remove this reservation.", "ReservationNotYours", ErrorCategory.InvalidOperation);
                         continue;
                     default:
                         throw new ArgumentOutOfRangeException("Unanticipated situation.");
