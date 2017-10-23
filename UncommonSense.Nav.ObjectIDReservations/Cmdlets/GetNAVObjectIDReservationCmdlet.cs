@@ -18,7 +18,18 @@ namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
         /// <Exclude/>
         protected override void EndProcessing()
         {
-            WriteObject(LoadReservations(), true);                        
+            var reservations = LoadReservations();
+
+            switch (reservations.Any())
+            {
+                case true:
+                    WriteObject(reservations, true);
+                    break;
+
+                case false:
+                    WriteWarning("The reservations list is empty.");
+                    break;
+            }
         }
     }
 }
