@@ -9,11 +9,6 @@ using System.Threading.Tasks;
 
 namespace UncommonSense.Nav.ObjectIDReservations
 {
-    // FIXME: Voeg scriptblock en status "Reserved" toe aan bestaande cmdlet(s)
-    // FIXME: Cmdlet voor omzetten naar HTML weg; formatting file maken
-    // FIXME: Functions in profile die eerste tf get doen (niet eens default params nodig, dus)
-    // FIXME: Datafile in TFS; get en checkin waar nodig
-
     public class Reservation
     {
         internal Reservation(ObjectType objectType, int objectID, DateTime dateTime, string userName, string comment)
