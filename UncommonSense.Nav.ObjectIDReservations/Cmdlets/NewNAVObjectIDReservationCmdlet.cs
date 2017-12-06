@@ -35,7 +35,7 @@ namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
         public string Comment { get; set; }
 
         /// <summary>
-        /// <para type="desc">If present, allows overwriting of other users' reservations</para>
+        /// <para type="description">If present, allows overwriting of other users' reservations</para>
         /// </summary>
         [Parameter()]
         public SwitchParameter Force { get; set; }
