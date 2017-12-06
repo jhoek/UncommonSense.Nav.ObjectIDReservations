@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
 {
     /// <summary>
-    /// <para type="description">Retrieves all NAV object ID reservations</para>
+    /// <para type="synopsis">Retrieves all NAV object ID reservations</para>
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "NAVObjectIDReservation")]
     [OutputType(typeof(Reservation))]

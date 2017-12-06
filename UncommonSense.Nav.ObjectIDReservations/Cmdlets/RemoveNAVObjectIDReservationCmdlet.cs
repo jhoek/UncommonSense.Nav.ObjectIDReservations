@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
 {
     /// <summary>
-    /// <para type="description">Removes an existing NAV object ID reservation</para>
+    /// <para type="synopsis">Removes one or more existing NAV object ID reservations</para>
     /// </summary>
     [Cmdlet(VerbsCommon.Remove, "NavObjectIDReservation")]
     [Alias("unreserve")]

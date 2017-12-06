@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
 {
     /// <summary>
-    /// <para type="description">Creates a new NAV object ID reservation</para>
+    /// <para type="synopsis">Creates one or more new NAV object ID reservations</para>
     /// </summary>
     [Cmdlet(VerbsCommon.New, "NavObjectIDReservation")]
     [OutputType(typeof(Reservation))]

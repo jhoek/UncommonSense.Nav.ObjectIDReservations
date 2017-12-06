@@ -14,13 +14,22 @@ namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
 {
     public abstract class NAVObjectIDReservationCmdlet : Cmdlet
     {
+        /// <summary>
+        /// <para type="description">The path to your local reservations data file</para>
+        /// </summary>
         [Parameter(Mandatory = true)]
         public string DataFilePath { get; set; }
 
+        /// <summary>
+        /// <para type="description">The scriptblock to invoke before loading your local data file</para>
+        /// </summary>
         [Parameter()]
         [ValidateNotNull()]
         public ScriptBlock BeforeLoad { get; set; } = ScriptBlock.Create("{}");
 
+        /// <summary>
+        /// <para type="description">The scriptblock to invoke after saving your local data file</para>
+        /// </summary>
         [Parameter()]
         [ValidateNotNull()]
         public ScriptBlock AfterSave { get; set; } = ScriptBlock.Create("{}");
