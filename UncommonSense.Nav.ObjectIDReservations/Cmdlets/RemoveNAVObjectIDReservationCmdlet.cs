@@ -11,6 +11,7 @@ namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
     /// <para type="description">Removes an existing NAV object ID reservation</para>
     /// </summary>
     [Cmdlet(VerbsCommon.Remove, "NavObjectIDReservation")]
+    [Alias("unreserve")]
     public class RemoveNAVObjectIDReservationCmdlet : NAVObjectIDReservationCmdlet
     {
         /// <summary>
