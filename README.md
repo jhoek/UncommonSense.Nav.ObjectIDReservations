@@ -1,20 +1,19 @@
 ﻿# UncommonSense.Nav.ObjectIDReservations
 
+PowerShell module for managing Microsoft Dynamics NAV object ID reservations
+
 ## Index
 
 | Command | Synopsis |
 | ------- | -------- |
-| [Get-NAVObjectIDReservation](#Get-NAVObjectIDReservation) |  |
-| [New-NavObjectIDReservation](#New-NavObjectIDReservation) |  |
-| [Remove-NavObjectIDReservation](#Remove-NavObjectIDReservation) |  |
+| [Get-NAVObjectIDReservation](#Get-NAVObjectIDReservation) | Retrieves all NAV object ID reservations |
+| [New-NavObjectIDReservation](#New-NavObjectIDReservation) | Creates one or more new NAV object ID reservations |
+| [Remove-NavObjectIDReservation](#Remove-NavObjectIDReservation) | Removes one or more existing NAV object ID reservations |
 
 <a name="Get-NAVObjectIDReservation"></a>
 ## Get-NAVObjectIDReservation
 ### Synopsis
-
-### Description
 Retrieves all NAV object ID reservations
-
 ### Syntax
 ```powershell
 Get-NAVObjectIDReservation -DataFilePath <string> [-BeforeLoad <scriptblock>] [-AfterSave <scriptblock>] [<CommonParameters>]
@@ -25,6 +24,7 @@ Get-NAVObjectIDReservation -DataFilePath <string> [-BeforeLoad <scriptblock>] [-
 
 ### Parameters
 #### DataFilePath &lt;string&gt;
+    The path to your local reservations data file
     
     Required?                    true
     Position?                    named
@@ -32,6 +32,7 @@ Get-NAVObjectIDReservation -DataFilePath <string> [-BeforeLoad <scriptblock>] [-
     Accept pipeline input?       false
     Accept wildcard characters?  false
 #### BeforeLoad &lt;ScriptBlock&gt;
+    The scriptblock to invoke before loading your local data file
     
     Required?                    false
     Position?                    named
@@ -39,6 +40,7 @@ Get-NAVObjectIDReservation -DataFilePath <string> [-BeforeLoad <scriptblock>] [-
     Accept pipeline input?       false
     Accept wildcard characters?  false
 #### AfterSave &lt;ScriptBlock&gt;
+    The scriptblock to invoke after saving your local data file
     
     Required?                    false
     Position?                    named
@@ -48,10 +50,7 @@ Get-NAVObjectIDReservation -DataFilePath <string> [-BeforeLoad <scriptblock>] [-
 <a name="New-NavObjectIDReservation"></a>
 ## New-NavObjectIDReservation
 ### Synopsis
-
-### Description
-Creates a new NAV object ID reservation
-
+Creates one or more new NAV object ID reservations
 ### Syntax
 ```powershell
 New-NavObjectIDReservation [-ObjectType] <ObjectType> [-ObjectID] <int[]> [[-Comment] <string>] -DataFilePath <string> [-Force] [-BeforeLoad <scriptblock>] [-AfterSave <scriptblock>] [<CommonParameters>]
@@ -95,6 +94,7 @@ New-NavObjectIDReservation [-ObjectType] <ObjectType> [-ObjectID] <int[]> [[-Com
     Accept pipeline input?       false
     Accept wildcard characters?  false
 #### DataFilePath &lt;string&gt;
+    The path to your local reservations data file
     
     Required?                    true
     Position?                    named
@@ -102,6 +102,7 @@ New-NavObjectIDReservation [-ObjectType] <ObjectType> [-ObjectID] <int[]> [[-Com
     Accept pipeline input?       false
     Accept wildcard characters?  false
 #### BeforeLoad &lt;ScriptBlock&gt;
+    The scriptblock to invoke before loading your local data file
     
     Required?                    false
     Position?                    named
@@ -109,6 +110,7 @@ New-NavObjectIDReservation [-ObjectType] <ObjectType> [-ObjectID] <int[]> [[-Com
     Accept pipeline input?       false
     Accept wildcard characters?  false
 #### AfterSave &lt;ScriptBlock&gt;
+    The scriptblock to invoke after saving your local data file
     
     Required?                    false
     Position?                    named
@@ -118,10 +120,7 @@ New-NavObjectIDReservation [-ObjectType] <ObjectType> [-ObjectID] <int[]> [[-Com
 <a name="Remove-NavObjectIDReservation"></a>
 ## Remove-NavObjectIDReservation
 ### Synopsis
-
-### Description
-Removes an existing NAV object ID reservation
-
+Removes one or more existing NAV object ID reservations
 ### Syntax
 ```powershell
 Remove-NavObjectIDReservation [-ObjectType] <ObjectType> [-ObjectID] <int[]> -DataFilePath <string> [-Force] [-BeforeLoad <scriptblock>] [-AfterSave <scriptblock>] [<CommonParameters>]
@@ -154,6 +153,7 @@ Remove-NavObjectIDReservation [-ObjectType] <ObjectType> [-ObjectID] <int[]> -Da
     Accept pipeline input?       false
     Accept wildcard characters?  false
 #### DataFilePath &lt;string&gt;
+    The path to your local reservations data file
     
     Required?                    true
     Position?                    named
@@ -161,6 +161,7 @@ Remove-NavObjectIDReservation [-ObjectType] <ObjectType> [-ObjectID] <int[]> -Da
     Accept pipeline input?       false
     Accept wildcard characters?  false
 #### BeforeLoad &lt;ScriptBlock&gt;
+    The scriptblock to invoke before loading your local data file
     
     Required?                    false
     Position?                    named
@@ -168,10 +169,11 @@ Remove-NavObjectIDReservation [-ObjectType] <ObjectType> [-ObjectID] <int[]> -Da
     Accept pipeline input?       false
     Accept wildcard characters?  false
 #### AfterSave &lt;ScriptBlock&gt;
+    The scriptblock to invoke after saving your local data file
     
     Required?                    false
     Position?                    named
     Default value                {}
     Accept pipeline input?       false
     Accept wildcard characters?  false
-<div style='font-size:small; color: #ccc'>Generated 06-12-2017 12:04</div>
+<div style='font-size:small; color: #ccc'>Generated 06-12-2017 12:19</div>
