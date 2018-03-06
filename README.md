@@ -16,13 +16,37 @@ PowerShell module for managing Microsoft Dynamics NAV object ID reservations
 Retrieves all NAV object ID reservations
 ### Syntax
 ```powershell
-Get-NAVObjectIDReservation -DataFilePath <string> [-BeforeLoad <scriptblock>] [-AfterSave <scriptblock>] [<CommonParameters>]
+Get-NAVObjectIDReservation -DataFilePath <string> [-Comment <string>] [-UserName <string>] [-ObjectType <ObjectType[]>] [-BeforeLoad <scriptblock>] [-AfterSave <scriptblock>] [<CommonParameters>]
 ```
 ### Output Type(s)
 
 - UncommonSense.Nav.ObjectIDReservations.Reservation
 
 ### Parameters
+#### Comment &lt;string&gt;
+    Filters reservations by specified comment text.
+    
+    Required?                    false
+    Position?                    named
+    Default value                *
+    Accept pipeline input?       false
+    Accept wildcard characters?  false
+#### UserName &lt;string&gt;
+    Filters reservations by specified user name.
+    
+    Required?                    false
+    Position?                    named
+    Default value                *
+    Accept pipeline input?       false
+    Accept wildcard characters?  false
+#### ObjectType &lt;ObjectType[]&gt;
+    Filters reservations by specified object type.
+    
+    Required?                    false
+    Position?                    named
+    Default value                Table, Page, Report, Codeunit, XmlPort, Query, MenuSuite
+    Accept pipeline input?       false
+    Accept wildcard characters?  false
 #### DataFilePath &lt;string&gt;
     The path to your local reservations data file
     
@@ -87,6 +111,7 @@ New-NavObjectIDReservation [-ObjectType] <ObjectType> [-ObjectID] <int[]> [[-Com
     Accept pipeline input?       false
     Accept wildcard characters?  false
 #### Force &lt;SwitchParameter&gt;
+    If present, allows overwriting of other users&#39; reservations
     
     Required?                    false
     Position?                    named
@@ -176,4 +201,4 @@ Remove-NavObjectIDReservation [-ObjectType] <ObjectType> [-ObjectID] <int[]> -Da
     Default value                {}
     Accept pipeline input?       false
     Accept wildcard characters?  false
-<div style='font-size:small; color: #ccc'>Generated 06-12-2017 12:19</div>
+<div style='font-size:small; color: #ccc'>Generated 06-03-2018 08:45</div>
