@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Management.Automation;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
 {
@@ -15,10 +11,45 @@ namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
     [Alias("reservations")]
     public class GetNAVObjectIDReservationCmdlet : NAVObjectIDReservationCmdlet
     {
+        /// <summary>
+        /// <para type="description">Filters reservations by specified comment text.</para>
+        /// </summary>
+        [Parameter()]
+        [ValidateNotNull()]
+        [SupportsWildcards()]
+        public string Comment { get; set; } = "*";
+
+        /// <summary>
+        /// <para type="description">Filters reservations by specified user name.</para>
+        /// </summary>
+        [Parameter()]
+        [ValidateNotNull()]
+        [SupportsWildcards()]
+        public string UserName { get; set; } = "*";
+
+        /// <summary>
+        /// <para type="description">Filters reservations by specified object type.</para>
+        /// </summary>
+        [Parameter()]
+        [ValidateCount(1, int.MaxValue)]
+        public ObjectType[] ObjectType { get; set; } = System.Enum.GetValues(typeof(ObjectType)).Cast<ObjectType>().ToArray();
+
         /// <Exclude/>
         protected override void EndProcessing()
         {
             var reservations = LoadReservations();
+
+            if (!reservations.Any())
+            {
+                WriteWarning("The reservations list is empty.");
+                return;
+            }
+
+            reservations =
+                reservations
+                    .Where(r => new WildcardPattern(UserName, WildcardOptions.CultureInvariant | WildcardOptions.IgnoreCase).IsMatch(r.UserName))
+                    .Where(r => new WildcardPattern(Comment, WildcardOptions.CultureInvariant | WildcardOptions.IgnoreCase).IsMatch(r.Comment))
+                    .Where(r => ObjectType.Contains(r.ObjectType));
 
             switch (reservations.Any())
             {
@@ -27,7 +58,7 @@ namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
                     break;
 
                 case false:
-                    WriteWarning("The reservations list is empty.");
+                    WriteWarning("No reservations match your filter criteria.");
                     break;
             }
         }
