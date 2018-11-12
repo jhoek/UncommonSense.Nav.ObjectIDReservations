@@ -10,7 +10,7 @@ namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
     /// <summary>
     /// <para type="synopsis">Removes one or more existing NAV object ID reservations</para>
     /// </summary>
-    [Cmdlet(VerbsCommon.Remove, "NavObjectIDReservation")]
+    [Cmdlet(VerbsCommon.Remove, "NavObjectIDReservation", SupportsShouldProcess =true)]
     [Alias("unreserve")]
     public class RemoveNAVObjectIDReservationCmdlet : NAVObjectIDReservationCmdlet
     {
@@ -62,8 +62,11 @@ namespace UncommonSense.Nav.ObjectIDReservations.Cmdlets
                         throw new ArgumentOutOfRangeException("Unanticipated situation.");
                 }
 
-                WriteVerbose($"Removing reservation for {ObjectType} {objectID}");
-                reservations.Remove(reservation);
+                if (ShouldProcess($"{reservation.UserName}'s reservation for {ObjectType} {objectID} from {reservation.DateTime} with comment '{reservation.Comment}' would be deleted.", $"Remove {reservation.UserName}'s reservation for {ObjectType} {objectID}?", "Remove-NAVObjectIDReservation"))
+                {
+                    WriteVerbose($"Removing reservation for {ObjectType} {objectID}");
+                    reservations.Remove(reservation);
+                }
             }
         }
 
