@@ -16,7 +16,11 @@ namespace UncommonSense.Nav.ObjectIDReservations
         Codeunit,
         XmlPort,
         Query,
-        MenuSuite
+        MenuSuite,
+        TableExtension,
+        PageExtension,
+        EnumType,
+        EnumTypeExtension
     }
 }
 
